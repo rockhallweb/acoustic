@@ -1,0 +1,117 @@
+// Acoustic Main 'Database'
+Table RockHallSalesforce {
+  //Acoustic System fields
+  Opt_In_Details System
+  Email_Type System
+  CRM_Account_ID System
+  CRM_Enable_Sync System
+  Opted_Out_Date System
+  CRM_Sync_ID System
+  Email System
+  CRM_Lead_Source System
+  Last_Modified_Date System
+  Opt_Out_Details System
+  CRM_Contact_Type System
+  Opt_In_Date System
+  CREATED_FROM System
+  // Salesforce Contact / Lead fields
+  SF_Contact_Id Text
+  SF_Lead_Id Text
+  SF_FirstName Text
+  SF_LastName Text
+}
+
+// bunlde of Opps and OppLineItems
+Table OpportunitiesAndLineItems {
+  Opp_Id Text
+  Opp_AccountId Lookup(Account)
+  Opp_npsp__Primary_Contact__c Lookup(Contact)
+  Opp_CloseDate date
+  Opp_DonorType__c Picklist
+  Opp_FundName__c Text
+  Opp_npe01__Member_Level__c Picklist
+  Opp_npe01__Membership_End_Date__c date
+  Opp_MembershipFulfilled__c date
+  Opp_MembershipType__c Text
+  Opp_MostRecentMembership__c date
+  Opp_StageName Picklist
+  Opp_tixtrack__TicketureChannel__c Picklist
+  Opp_tixtrack__TicketureOrderNumber__c Text
+  Opp_TotalDonationAmount__c Number 
+  Opp_TotalMembershipAmount__c Number 
+  
+  OLI_OpportunityId Lookup(Opportunity)
+  OLI_ProductCode Text
+  OLI_ProductName__c Text
+  OLI_ProductType__c Picklist
+  OLI_Quantity Number
+  OLI_UnitPrice Currency
+  OLI_TotalPrice Currency
+  OLI_tixtrack__TicketureEventCategory__c Text
+  OLI_tixtrack__TicketureEventSessionDateTime__c datetime
+  OLI_tixtrack__TicketureEventSessionEndDateTime__c datetime
+  OLI_tixtrack__TicketureOccurredAt__c datetime 
+  OLI_tixtrack__TicketureRedeemedDateTime__c datetime
+  OLI_tixtrack__TicketureStatus__c Picklist
+  OLI_tixtrack__TicketureTicketGroup__c Text
+  
+  COMBO_KEY TEXT
+  
+  
+}
+
+// Bundle of Orders and OrderLineItems
+Table OrdersAndLineItems {
+  Order_Id Text
+ 
+}
+
+// FV 
+Table FanVote {
+  FV_Id Text
+  FV_Contact__c Lookup(Contact)
+  FV_Contact_Email__c Email
+  FV_ClassYear__c Number
+  FV_Nominee001__c Number
+  FV_Nominee002__c Number
+  FV_Nominee003__c Number
+  FV_Nominee004__c Number
+  FV_Nominee005__c Number
+}
+
+// Bundle of Campaign and Campaing Members
+Table Campaigns {
+  Id Text
+  CampaignId Lookup(Campaign)
+  CampaignName__c Text
+  ContactId Lookup(Contact)
+  LeadId Lookup(Lead)
+  LeadSource Picklist
+  City Text
+  State Text
+  Country Text 
+  PostalCode Text
+  DoNotCall Checkbox
+  Email EmailAddress
+  FirstName Text
+  LastName Text
+  Phone Phone
+  HasResponded Checkbox
+  FirstRespondedDate date
+  Status Picklist
+  Title Text
+  silverpop__member_id__c ExternalId
+}
+
+Table Accounts {
+  Id Text
+}
+
+
+// > many-to-one; < one-to-many; - one-to-one; <> many-to-many
+Ref: FanVote.FV_Contact__c <> RockHallSalesforce.CRM_Sync_ID
+Ref: Campaigns.ContactId <> RockHallSalesforce.SF_Contact_Id
+Ref: Campaigns.LeadId <> RockHallSalesforce.SF_Lead_Id
+Ref: OpportunitiesAndLineItems.Opp_npsp__Primary_Contact__c <> RockHallSalesforce.SF_Contact_Id
+
+// https://dbdiagram.io/d/6345b19ff0018a1c5fe0cf17
