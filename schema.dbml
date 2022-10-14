@@ -68,15 +68,37 @@ Table OrdersAndLineItems {
 
 // FV 
 Table FanVote {
-  FV_Id Text
-  FV_Contact__c Lookup(Contact)
-  FV_Contact_Email__c Email
-  FV_ClassYear__c Number
-  FV_Nominee001__c Number
-  FV_Nominee002__c Number
-  FV_Nominee003__c Number
-  FV_Nominee004__c Number
-  FV_Nominee005__c Number
+  "Ballot Id"  "Sync Id"
+  "Contact Id" "Sync Id"
+  "Contact Email" Email
+  "Class Year" Numeric
+  "Mary J Blige" Numeric
+  "Kate Bush" Numeric
+  "Devo" Numeric
+  "Foo Fighters" Numeric
+  "The Go Gos" Numeric
+  "Iron Maiden" Numeric
+  "JAY Z" Numeric
+  "Chaka Khan" Numeric
+  "Carole King" Numeric
+  "Fela Kuti" Numeric
+  "LL Cool J" Numeric
+  "New York Dolls" Numeric
+  "Rage Against The Machine" Numeric
+  "Todd Rundgren" Numeric
+  "Tina Turner" Numeric
+  "Dionne Warwick" Numeric
+  "Beck" Numeric
+  "Pat Benatar" Numeric
+  "Duran Duran" Numeric
+  "Eminem" Numeric
+  "Eurythmics" Numeric
+  "Judas Priest" Numeric
+  "MC5" Numeric
+  "Dolly Parton" Numeric
+  "Lionel Richie" Numeric
+  "Carly Simon" Numeric
+  "A Tribe Called Quest" Numeric
 }
 
 // Bundle of Campaign and Campaing Members
@@ -109,7 +131,7 @@ Table Accounts {
 
 
 // > many-to-one; < one-to-many; - one-to-one; <> many-to-many
-Ref: FanVote.FV_Contact__c <> RockHallSalesforce.CRM_Sync_ID
+Ref: FanVote."Contact Id" <> RockHallSalesforce.CRM_Sync_ID
 Ref: Campaigns.ContactId <> RockHallSalesforce.SF_Contact_Id
 Ref: Campaigns.LeadId <> RockHallSalesforce.SF_Lead_Id
 Ref: OpportunitiesAndLineItems.Opp_npsp__Primary_Contact__c <> RockHallSalesforce.SF_Contact_Id
