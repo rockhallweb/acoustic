@@ -22,41 +22,42 @@ Table RockHallSalesforce {
 }
 
 // bunlde of Opps and OppLineItems
-Table OpportunitiesAndLineItems {
-  Opp_Id Text
-  Opp_AccountId Lookup(Account)
-  Opp_npsp__Primary_Contact__c Lookup(Contact)
-  Opp_CloseDate date
-  Opp_DonorType__c Picklist
-  Opp_FundName__c Text
-  Opp_npe01__Member_Level__c Picklist
-  Opp_npe01__Membership_End_Date__c date
-  Opp_MembershipFulfilled__c date
-  Opp_MembershipType__c Text
-  Opp_MostRecentMembership__c date
-  Opp_StageName Picklist
-  Opp_tixtrack__TicketureChannel__c Picklist
-  Opp_tixtrack__TicketureOrderNumber__c Text
-  Opp_TotalDonationAmount__c Number 
-  Opp_TotalMembershipAmount__c Number 
+Table OppsAndLineItems {
+  COMBOKEY "Sync Id"
+  //Opportunity fields
+  "Oportunity Id" "Sync Id"
+  "Account Id" "Sync Id"
+  "Primary Contact Id"  "Sync Id"
+  "CloseDate"  Date
+  "Donor Type" Text
+  "Fund Name" Text
+  "Member Level" Text
+  "Membership End Date" Date
+  "Membership Fulfilled" Date
+  "Membership Type" Text
+  "Most Recent Membership" Date
+  "Stage" Text
+  "Ticketure Channel" Text
+  "Ticketure Order Number" Text
+  "Total Donation Amount" Number
+  "Total Membership Amount" Number
   
-  OLI_OpportunityId Lookup(Opportunity)
-  OLI_ProductCode Text
-  OLI_ProductName__c Text
-  OLI_ProductType__c Picklist
-  OLI_Quantity Number
-  OLI_UnitPrice Currency
-  OLI_TotalPrice Currency
-  OLI_tixtrack__TicketureEventCategory__c Text
-  OLI_tixtrack__TicketureEventSessionDateTime__c datetime
-  OLI_tixtrack__TicketureEventSessionEndDateTime__c datetime
-  OLI_tixtrack__TicketureOccurredAt__c datetime 
-  OLI_tixtrack__TicketureRedeemedDateTime__c datetime
-  OLI_tixtrack__TicketureStatus__c Picklist
-  OLI_tixtrack__TicketureTicketGroup__c Text
-  
-  COMBO_KEY TEXT
-  
+  // Line Item fields
+  "Opp Line Item Id" "Sync Id"
+  "Opportunity Parent Id" "Sync Id"
+  "Product Code" Text
+  "Product Name" Text
+  "Product Type" Text
+  "Quantity" Numeric
+  "Sales Price" Numeric
+  "Total Price" Numeric
+  "Ticketure Event Category" Text
+  "Ticketure Event Session End Date Time" Date
+  "Ticketure Event Session Start Date Time" Date
+  "Ticketure Occurred At Date and Time" Date
+  "Ticketure Redeemed Date Time" Date
+  "Ticketure Status" Text
+  "Ticketure Ticket Group" Text
   
 }
 
@@ -134,6 +135,6 @@ Table Accounts {
 Ref: FanVote."Contact Id" <> RockHallSalesforce.CRM_Sync_ID
 Ref: Campaigns.ContactId <> RockHallSalesforce.SF_Contact_Id
 Ref: Campaigns.LeadId <> RockHallSalesforce.SF_Lead_Id
-Ref: OpportunitiesAndLineItems.Opp_npsp__Primary_Contact__c <> RockHallSalesforce.SF_Contact_Id
+Ref: OppsAndLineItems."Primary Contact Id" <> RockHallSalesforce.SF_Contact_Id
 
 // https://dbdiagram.io/d/6345b19ff0018a1c5fe0cf17
