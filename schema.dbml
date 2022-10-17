@@ -62,9 +62,34 @@ Table OppsAndLineItems {
 }
 
 // Bundle of Orders and OrderLineItems
+// Bundle of Orders and OrderLineItems
 Table OrdersAndLineItems {
-  Order_Id Text
- 
+	COMBOKEY "Sync Id"
+
+	// Order fields
+	"Order Id" "Sync Id"
+	"Accout Id" "Sync Id"
+	"Bill To Contact Id" "Sync Id"
+	"Opportunity Id" "Sync Id"
+	"Order Description" "Text"
+	"Order Amount" "Numeric"
+	"Order Name" "Text"
+	"Order Number" "Text"
+	"Order Status" "Text"
+	"Shopify Account Email" "Email"
+	"Shopify Customer Email" "Email"
+
+	// Item Fields
+	"Order Item Id" "Sync Id"
+	"Order Parent Id" "Sync Id"
+	"Product Id" "Sync Id"
+	"Product Name" "Text"
+	"Product Type" "Text"
+	"Item Description" "Text"
+	"List Price" "Numberic"
+	"Total Price" "Numberic"
+	"Unit Price" "Numberic"
+	"Quantity" "Numberic"
 }
 
 // FV 
@@ -136,5 +161,6 @@ Ref: FanVote."Contact Id" <> RockHallSalesforce.CRM_Sync_ID
 Ref: Campaigns.ContactId <> RockHallSalesforce.SF_Contact_Id
 Ref: Campaigns.LeadId <> RockHallSalesforce.SF_Lead_Id
 Ref: OppsAndLineItems."Primary Contact Id" <> RockHallSalesforce.SF_Contact_Id
+Ref: OrdersAndLineItems."Bill To Contact Id" <> RockHallSalesforce.SF_Contact_Id
 
 // https://dbdiagram.io/d/6345b19ff0018a1c5fe0cf17
