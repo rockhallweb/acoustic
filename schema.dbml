@@ -33,7 +33,7 @@ Table OppsAndLineItems {
   "Fund Name" Text
   "Member Level" Text
   "Membership End Date" Date
-  "Membership Fulfilled" Date
+  "Membership Fulfilled" "Yes/ No"
   "Membership Type" Text
   "Most Recent Membership" Date
   "Stage" Text
